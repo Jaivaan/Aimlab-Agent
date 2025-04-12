@@ -2204,13 +2204,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078121410}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.12008671, y: 0.74403733, z: -0.13909245, w: -0.64237136}
-  m_LocalPosition: {x: 2.056508, y: 4.430173, z: -3.5784712}
+  m_LocalRotation: {x: -0.07851875, y: 0.058216847, z: -0.004242289, w: -0.99520236}
+  m_LocalPosition: {x: 0.88, y: -1.14, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.02, y: -6.699, z: -0.041}
 --- !u!1 &1109440459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,6 +2783,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 46.510002, y: 72.73701, z: -617.653}
+--- !u!1 &1356803415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356803417}
+  - component: {fileID: 1356803416}
+  m_Layer: 0
+  m_Name: TargetSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1356803416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356803415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beab97ccdfe94884e9cbfe4f6ce9d2f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 2985482543708935551, guid: 1ff798a7eac042a419e699010409b2b4, type: 3}
+  spawnAreaCenter: {x: -7.6, y: -3.86, z: 11.8}
+  spawnAreaSize: {x: 43.5, y: 15.7, z: 14.3}
+  spawnDelay: 0.5
+--- !u!4 &1356803417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356803415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6400479, y: -22.170574, z: 59.134094}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1454060144
 GameObject:
   m_ObjectHideFlags: 0
@@ -4333,9 +4381,6 @@ PrefabInstance:
       addedObject: {fileID: 1909652336}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ea49307f25448c408a39959ace24a34, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1909652335}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ea49307f25448c408a39959ace24a34, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1909652334}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ea49307f25448c408a39959ace24a34, type: 3}
       insertIndex: -1
@@ -4454,38 +4499,9 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  rayDistance: 100
   rotationSpeed: 150
---- !u!114 &1909652335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909652329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 1
-    NumStackedVectorObservations: 1
-    m_ActionSpec:
-      m_NumContinuousActions: 0
-      BranchSizes: 01000000
-    VectorActionSize: 01000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 0
-    hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: My Behavior
-  TeamId: 0
-  m_UseChildSensors: 1
-  m_UseChildActuators: 1
-  m_ObservableAttributeHandling: 0
+  projectilePrefab: {fileID: 8968135115841721286, guid: efe27e4ce6bac764ea8aec6344aa32e5, type: 3}
+  projectileSpeed: 50
 --- !u!95 &1909652336
 Animator:
   serializedVersion: 5
@@ -4723,3 +4739,4 @@ SceneRoots:
   - {fileID: 1327540422}
   - {fileID: 2129737821}
   - {fileID: 1909652328}
+  - {fileID: 1356803417}
