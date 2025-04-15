@@ -4443,7 +4443,7 @@ MonoBehaviour:
   m_DetectableTags: []
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 61
-  m_SphereCastRadius: 0.69
+  m_SphereCastRadius: 2.05
   m_RayLength: 156
   m_RayLayerMask:
     serializedVersion: 2
@@ -4466,12 +4466,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 3
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 01000000
-    VectorActionSize: 01000000
+      BranchSizes: 06000000
+    VectorActionSize: 06000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -4498,10 +4498,11 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 500
   rotationSpeed: 150
   projectilePrefab: {fileID: 8968135115841721286, guid: efe27e4ce6bac764ea8aec6344aa32e5, type: 3}
   projectileSpeed: 50
+  shootCooldown: 0.5
 --- !u!95 &1909652336
 Animator:
   serializedVersion: 5

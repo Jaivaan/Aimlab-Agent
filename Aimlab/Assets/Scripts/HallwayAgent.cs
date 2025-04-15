@@ -8,10 +8,18 @@ public class HallwayAgent : Agent
 {
     public float rotationSpeed = 150f;
 
-    // Nuevo: Prefab del proyectil a disparar (puede ser una esfera con collider)
+    // Prefab del proyectil (una esfera) a disparar.
     public GameObject projectilePrefab;
-    // Velocidad a la que se desplaza el proyectil
+    // Velocidad del proyectil.
     public float projectileSpeed = 50f;
+
+    // Tiempo mínimo de espera entre disparos (en segundos).
+    public float shootCooldown = 0.5f;
+    // Último tiempo en que se disparó.
+    private float lastShotTime = -Mathf.Infinity;
+
+    // Variable para almacenar el ángulo vertical (pitch) actual, en grados (con signo).
+    private float currentPitch;
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -20,22 +28,41 @@ public class HallwayAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        // Acciones discretas:
-        // 0: No hacer nada, 1: Rotar izquierda, 2: Rotar derecha, 3: Disparar
+        // Se asume que el espacio de acciones discreto tiene 6 opciones:
+        // 0: No hacer nada
+        // 1: Rotar horizontalmente a la izquierda
+        // 2: Rotar horizontalmente a la derecha
+        // 3: Rotar verticalmente hacia arriba
+        // 4: Rotar verticalmente hacia abajo
+        // 5: Disparar (si el cooldown lo permite)
         int action = actionBuffers.DiscreteActions[0];
 
         switch (action)
         {
+            case 0:
+                // No hacer nada.
+                break;
             case 1:
-                // Rotar izquierda
+                // Rotar a la izquierda.
                 transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
                 break;
             case 2:
-                // Rotar derecha
+                // Rotar a la derecha.
                 transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
                 break;
             case 3:
-                // Disparar: Se instancia un proyectil que llevará la lógica de colisiones y recompensas
+                // Rotar verticalmente hacia arriba.
+                // Suponiendo que girar hacia arriba disminuye el ángulo de pitch.
+                currentPitch = Mathf.Clamp(currentPitch - rotationSpeed * Time.deltaTime, -45f, 60f);
+                ApplyVerticalRotation();
+                break;
+            case 4:
+                // Rotar verticalmente hacia abajo.
+                currentPitch = Mathf.Clamp(currentPitch + rotationSpeed * Time.deltaTime, -45f, 60f);
+                ApplyVerticalRotation();
+                break;
+            case 5:
+                // Disparar solo si ha pasado el cooldown.
                 Shoot();
                 break;
             default:
@@ -44,17 +71,33 @@ public class HallwayAgent : Agent
     }
 
     /// <summary>
-    /// Instancia un proyectil (una esfera) en la dirección en la que el agente está mirando.
-    /// El proyectil llevará una referencia al agente (shooter) para que, en el script del proyectil,
-    /// se asignen las recompensas correspondientes según la colisión.
+    /// Aplica el ángulo vertical (pitch) al agente, manteniendo la rotación horizontal intacta.
+    /// </summary>
+    void ApplyVerticalRotation()
+    {
+        // Recupera los ángulos actuales.
+        Vector3 euler = transform.localEulerAngles;
+        // Convertir el pitch guardado en "currentPitch" (en rango de -45 a 60) a un ángulo en el rango 0-360
+        // para asignarlo a la propiedad localEulerAngles.x.
+        float angleToSet = currentPitch < 0 ? 360 + currentPitch : currentPitch;
+        euler.x = angleToSet;
+        transform.localEulerAngles = euler;
+    }
+
+    /// <summary>
+    /// Método que instancia un proyectil en la dirección en la que el agente está mirando.
+    /// El proyectil llevará la referencia al agente para asignar recompensas en base a la colisión.
     /// </summary>
     void Shoot()
     {
-        // Posición de spawn: un poco adelante del agente para evitar colisiones inmediatas
+        if (Time.time - lastShotTime >= shootCooldown)
+        {
+            //Debug.Log("Disparo ejecutado en " + Time.time);
+            // Posición de spawn: un poco adelante para evitar colisión con el propio agente.
         Vector3 spawnPos = transform.position + transform.forward;
         GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
 
-        // Se obtiene o añade el Rigidbody para mover el proyectil
+        // Añadir o usar el Rigidbody para mover el proyectil.
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -62,43 +105,63 @@ public class HallwayAgent : Agent
         }
         rb.velocity = transform.forward * projectileSpeed;
 
-        // Asigna la referencia al agente que dispara (esto es importante para la asignación de recompensas)
+        // Asignar la referencia del agente al script del proyectil.
         Projectile projScript = projectile.GetComponent<Projectile>();
         if (projScript != null)
         {
             projScript.shooter = this;
         }
-
-        // Se destruye el proyectil tras cierto tiempo (opcional, para evitar saturar la escena)
+        // Se destruye el proyectil tras un tiempo para evitar saturar la escena.
         Destroy(projectile, 3f);
+
+        lastShotTime = Time.time;
+       }
+        
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var discreteActionsOut = actionsOut.DiscreteActions;
-
-        // Usamos flechas para rotar y la barra espaciadora para disparar
+        
+        // Configura las teclas para depuración:
+        // Izquierda: rotar a la izquierda (1)
+        // Derecha: rotar a la derecha (2)
+        // Flecha arriba: rotar hacia arriba (3)
+        // Flecha abajo: rotar hacia abajo (4)
+        // Barra espaciadora: disparar (5)
+        // Si no se presiona nada, se envía 0 (sin acción).
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            discreteActionsOut[0] = 1; // Rotar izquierda
+            discreteActionsOut[0] = 1;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            discreteActionsOut[0] = 2; // Rotar derecha
+            discreteActionsOut[0] = 2;
+        }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            discreteActionsOut[0] = 3;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            discreteActionsOut[0] = 4;
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            discreteActionsOut[0] = 3; // Disparar
+            discreteActionsOut[0] = 5;
         }
         else
         {
-            discreteActionsOut[0] = 0; // No hacer nada
+            discreteActionsOut[0] = 0;
         }
     }
 
     public override void OnEpisodeBegin()
     {
-        // Reinicia la orientación del agente al iniciar el episodio
+        // Reinicia la orientación del agente y reinicia el ángulo vertical (pitch).
         transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+        // Se inicializa currentPitch a partir del ángulo local actual.
+        currentPitch = transform.localEulerAngles.x;
+        if (currentPitch > 180f) currentPitch -= 360f;
     }
 }
