@@ -21,9 +21,19 @@ public class HallwayAgent : Agent
     // Variable para almacenar el ángulo vertical (pitch) actual, en grados (con signo).
     private float currentPitch;
 
+    [Header("Referencias")]
+    public Transform targetTransform;   
+
+    [Header("Observaciones")]
+    public float maxObservationDistance = 20f;
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.forward);
+
+        Vector3 toTarget = targetTransform.position - transform.position;
+        sensor.AddObservation(toTarget.normalized);
+
+        sensor.AddObservation(Mathf.Clamp01(toTarget.magnitude / maxObservationDistance));
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -36,6 +46,14 @@ public class HallwayAgent : Agent
         // 4: Rotar verticalmente hacia abajo
         // 5: Disparar (si el cooldown lo permite)
         int action = actionBuffers.DiscreteActions[0];
+
+        AddReward(-0.001f);
+
+        if (action == 5) AddReward(0.05f);
+
+        Vector3 toTarget = targetTransform.position - transform.position;
+        float angle = Vector3.Angle(transform.forward, toTarget);
+        if (angle < 15f) AddReward(0.01f);
 
         switch (action)
         {

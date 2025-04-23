@@ -4503,6 +4503,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8968135115841721286, guid: efe27e4ce6bac764ea8aec6344aa32e5, type: 3}
   projectileSpeed: 50
   shootCooldown: 0.5
+  targetTransform: {fileID: 1356803417}
+  maxObservationDistance: 20
 --- !u!95 &1909652336
 Animator:
   serializedVersion: 5
