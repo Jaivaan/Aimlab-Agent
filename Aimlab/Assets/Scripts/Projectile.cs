@@ -21,6 +21,7 @@ public class Projectile : MonoBehaviour
             if (shooter != null)
             {
                 shooter.AddReward(5.0f);
+                shooter.EndEpisode();
             }
             Destroy(collision.gameObject);
         }
