@@ -15,7 +15,7 @@ public class TargetSpawner : MonoBehaviour
         SpawnTarget();
     }
 
-    void Update()
+   void Update()
     {
         if (currentTarget == null && !IsInvoking("SpawnTarget"))
         {
@@ -25,8 +25,9 @@ public class TargetSpawner : MonoBehaviour
 
     void SpawnTarget()
     {
-        Vector3 spawnPosition = GetRandomPosition();
-        currentTarget = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
+        Vector3 center = transform.position;
+        //Vector3 spawnPosition = GetRandomPosition();
+        currentTarget = Instantiate(targetPrefab, spawnAreaCenter, Quaternion.identity);
         currentTarget.tag = "Target";
     }
 
