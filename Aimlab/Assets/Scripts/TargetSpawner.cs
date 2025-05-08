@@ -3,44 +3,67 @@ using UnityEngine;
 public class TargetSpawner : MonoBehaviour
 {
     public GameObject targetPrefab;
+    public Transform[] spawnPoints; 
 
-    public Vector3 spawnAreaCenter = Vector3.zero;
-    public Vector3 spawnAreaSize = new Vector3(10f, 1f, 10f);
     public float spawnDelay = 0.5f;
 
     private GameObject currentTarget;
+    public int consecutiveHits = 0;
+    public int unlockedSpawns = 1;
+    public static TargetSpawner Instance;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     void Start()
     {
         SpawnTarget();
     }
 
-   void Update()
+    void Update()
     {
-        if (currentTarget == null && !IsInvoking("SpawnTarget"))
+        if (currentTarget == null && !IsInvoking(nameof(SpawnTarget)))
         {
-            Invoke("SpawnTarget", spawnDelay);
+            Invoke(nameof(SpawnTarget), spawnDelay);
         }
+    }
+
+    public void OnTargetHit()
+    {
+        consecutiveHits++;
+        if (consecutiveHits % 10 == 0 && unlockedSpawns < spawnPoints.Length)
+        {
+            unlockedSpawns++;
+        }
+    }
+
+    public void OnTargetMiss()
+    {
+        consecutiveHits = 0;
     }
 
     void SpawnTarget()
     {
-        Vector3 center = transform.position;
-        //Vector3 spawnPosition = GetRandomPosition();
-        currentTarget = Instantiate(targetPrefab, spawnAreaCenter, Quaternion.identity);
-        currentTarget.tag = "Target";
-    }
 
-    Vector3 GetRandomPosition()
-    {
-        float randomX = Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2);
-        float randomZ = Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2);
-        return spawnAreaCenter + new Vector3(randomX, 0f, randomZ);
+        int idx = Random.Range(0, unlockedSpawns);
+        Transform spawn = spawnPoints[idx];
+
+        currentTarget = Instantiate(targetPrefab, spawn.position, Quaternion.identity);
+        currentTarget.tag = "Target";
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(spawnAreaCenter, spawnAreaSize);
+        if (spawnPoints != null)
+        {
+            foreach (var p in spawnPoints)
+            {
+                if (p != null) Gizmos.DrawWireSphere(p.position, 0.3f);
+            }
+        }
     }
 }

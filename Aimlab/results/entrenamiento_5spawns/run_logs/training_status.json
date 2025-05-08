@@ -1,0 +1,29 @@
+{
+    "My Behavior": {
+        "checkpoints": [
+            {
+                "steps": 9841,
+                "file_path": "results\\entrenamiento_5spawns\\My Behavior\\My Behavior-9841.onnx",
+                "reward": -4.578076499872482,
+                "creation_time": 1746714847.7053466,
+                "auxillary_file_paths": [
+                    "results\\entrenamiento_5spawns\\My Behavior\\My Behavior-9841.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 9841,
+            "file_path": "results\\entrenamiento_5spawns\\My Behavior.onnx",
+            "reward": -4.578076499872482,
+            "creation_time": 1746714847.7053466,
+            "auxillary_file_paths": [
+                "results\\entrenamiento_5spawns\\My Behavior\\My Behavior-9841.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

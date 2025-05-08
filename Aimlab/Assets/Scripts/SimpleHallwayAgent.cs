@@ -30,6 +30,8 @@ public class SimpleHallwayAgent : Agent
     {
         int action = actionBuffers.DiscreteActions[0];
 
+        AddReward(-0.01f);
+
         switch (action)
         {
             case 0:

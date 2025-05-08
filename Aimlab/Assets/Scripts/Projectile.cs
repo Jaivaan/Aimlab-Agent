@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     public float lifetime = 3f;
     [HideInInspector] public Agent shooter;
 
-    //private bool hitTarget = false;
+    private bool hitTarget = false;
 
     private void Start()
     {
@@ -17,31 +17,27 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Target"))
         {
-            //hitTarget = true;
+            hitTarget = true;
             if (shooter != null)
             {
-                shooter.AddReward(5.0f);
+                shooter.AddReward(1.0f);
+                TargetSpawner.Instance.OnTargetHit();
                 shooter.EndEpisode();
             }
             Destroy(collision.gameObject);
         }
-       /* 
-        else
-        {
-            if (shooter != null)
-            {
-                shooter.AddReward(-0.1f);
-            }
-       
-        }*/
         Destroy(gameObject);
     }
-/*
-    private void OnDestroy()
+
+    void OnDestroy()
     {
-        if (!hitTarget && shooter != null)
+        if (!hitTarget && TargetSpawner.Instance != null)
         {
-            shooter.AddReward(-0.05f);
+            TargetSpawner.Instance.OnTargetMiss();
+            if (shooter != null)
+            {
+                shooter.AddReward(-0.01f);
+            }
         }
-    }*/
+    }
 }
