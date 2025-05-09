@@ -1,0 +1,65 @@
+{
+    "My Behavior": {
+        "checkpoints": [
+            {
+                "steps": 999999,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-999999.onnx",
+                "reward": -0.8858961335049486,
+                "creation_time": 1746807884.9197845,
+                "auxillary_file_paths": [
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-999999.pt"
+                ]
+            },
+            {
+                "steps": 1499991,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-1499991.onnx",
+                "reward": -0.890080536565473,
+                "creation_time": 1746811597.984635,
+                "auxillary_file_paths": [
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-1499991.pt"
+                ]
+            },
+            {
+                "steps": 1999995,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-1999995.onnx",
+                "reward": -0.0794936245000815,
+                "creation_time": 1746815534.6185832,
+                "auxillary_file_paths": [
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-1999995.pt"
+                ]
+            },
+            {
+                "steps": 2499983,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2499983.onnx",
+                "reward": -0.6045658255888334,
+                "creation_time": 1746819716.6435926,
+                "auxillary_file_paths": [
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2499983.pt"
+                ]
+            },
+            {
+                "steps": 2588676,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2588676.onnx",
+                "reward": -1.5439198541641235,
+                "creation_time": 1746820400.2807727,
+                "auxillary_file_paths": [
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2588676.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2588676,
+            "file_path": "results\\entrenamiento6\\My Behavior.onnx",
+            "reward": -1.5439198541641235,
+            "creation_time": 1746820400.2807727,
+            "auxillary_file_paths": [
+                "results\\entrenamiento6\\My Behavior\\My Behavior-2588676.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
