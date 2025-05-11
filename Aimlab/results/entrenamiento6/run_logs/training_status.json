@@ -2,58 +2,58 @@
     "My Behavior": {
         "checkpoints": [
             {
-                "steps": 999999,
-                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-999999.onnx",
-                "reward": -0.8858961335049486,
-                "creation_time": 1746807884.9197845,
+                "steps": 2749999,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2749999.onnx",
+                "reward": -0.2512870722084549,
+                "creation_time": 1746979333.4621701,
                 "auxillary_file_paths": [
-                    "results\\entrenamiento6\\My Behavior\\My Behavior-999999.pt"
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2749999.pt"
                 ]
             },
             {
-                "steps": 1499991,
-                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-1499991.onnx",
-                "reward": -0.890080536565473,
-                "creation_time": 1746811597.984635,
+                "steps": 2799992,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2799992.onnx",
+                "reward": -0.3499575668977479,
+                "creation_time": 1746979695.5817997,
                 "auxillary_file_paths": [
-                    "results\\entrenamiento6\\My Behavior\\My Behavior-1499991.pt"
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2799992.pt"
                 ]
             },
             {
-                "steps": 1999995,
-                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-1999995.onnx",
-                "reward": -0.0794936245000815,
-                "creation_time": 1746815534.6185832,
+                "steps": 2849988,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2849988.onnx",
+                "reward": -0.28784608367161874,
+                "creation_time": 1746980062.4476533,
                 "auxillary_file_paths": [
-                    "results\\entrenamiento6\\My Behavior\\My Behavior-1999995.pt"
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2849988.pt"
                 ]
             },
             {
-                "steps": 2499983,
-                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2499983.onnx",
-                "reward": -0.6045658255888334,
-                "creation_time": 1746819716.6435926,
+                "steps": 2899998,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2899998.onnx",
+                "reward": -0.5638708847184335,
+                "creation_time": 1746980431.624625,
                 "auxillary_file_paths": [
-                    "results\\entrenamiento6\\My Behavior\\My Behavior-2499983.pt"
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2899998.pt"
                 ]
             },
             {
-                "steps": 2588676,
-                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2588676.onnx",
-                "reward": -1.5439198541641235,
-                "creation_time": 1746820400.2807727,
+                "steps": 2922944,
+                "file_path": "results\\entrenamiento6\\My Behavior\\My Behavior-2922944.onnx",
+                "reward": -0.17053226123744544,
+                "creation_time": 1746980606.812605,
                 "auxillary_file_paths": [
-                    "results\\entrenamiento6\\My Behavior\\My Behavior-2588676.pt"
+                    "results\\entrenamiento6\\My Behavior\\My Behavior-2922944.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 2588676,
+            "steps": 2922944,
             "file_path": "results\\entrenamiento6\\My Behavior.onnx",
-            "reward": -1.5439198541641235,
-            "creation_time": 1746820400.2807727,
+            "reward": -0.17053226123744544,
+            "creation_time": 1746980606.812605,
             "auxillary_file_paths": [
-                "results\\entrenamiento6\\My Behavior\\My Behavior-2588676.pt"
+                "results\\entrenamiento6\\My Behavior\\My Behavior-2922944.pt"
             ]
         }
     },
