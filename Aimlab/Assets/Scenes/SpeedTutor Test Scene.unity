@@ -2882,6 +2882,8 @@ MonoBehaviour:
   - {fileID: 393329917}
   - {fileID: 1960132230}
   spawnDelay: 0.5
+  consecutiveHits: 0
+  unlockedSpawns: 1
 --- !u!4 &1356803417
 Transform:
   m_ObjectHideFlags: 0
